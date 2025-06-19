@@ -1,0 +1,130 @@
+<div class="contenedor">
+
+  
+  <section class="filtros">
+    <h2>🔍 Filtro Avanzado de Transacciones</h2>
+    <form [formGroup]="filtrosTransForm" (ngSubmit)="buscarTransacciones()">
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="tipo">
+          <mat-option value="">Todos</mat-option>
+          <mat-option value="Compra">Compra</mat-option>
+          <mat-option value="Venta">Venta</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Desde</mat-label>
+        <input matInput type="date" formControlName="fechaDesde" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Hasta</mat-label>
+        <input matInput type="date" formControlName="fechaHasta" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit">Buscar</button>
+      <button mat-stroked-button color="warn" type="button" (click)="resetearTransacciones()">Limpiar</button>
+    </form>
+
+
+    <table mat-table [dataSource]="transacciones" class="mat-elevation-z2 full-width">
+
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td mat-cell *matCellDef="let t"> {{ t.fecha | date: 'yyyy-MM-dd' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+        <td mat-cell *matCellDef="let t"> {{ t.tipo }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="detalle">
+        <th mat-header-cell *matHeaderCellDef> Detalle </th>
+        <td mat-cell *matCellDef="let t"> {{ t.detalle }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+        <td mat-cell *matCellDef="let t"> {{ t.cantidad }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef> Total </th>
+        <td mat-cell *matCellDef="let t"> {{ t.precioTotal | currency }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="transColumnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: transColumnas;"></tr>
+    </table>
+  </section>
+
+  <hr />
+
+  
+  <section class="filtros">
+    <h2>🧪 Filtro Avanzado de Productos</h2>
+    <form [formGroup]="filtrosProdForm" (ngSubmit)="buscarProductos()">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Categoría</mat-label>
+        <input matInput formControlName="categoria" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Precio Mín</mat-label>
+        <input matInput type="number" formControlName="precioMin" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Precio Máx</mat-label>
+        <input matInput type="number" formControlName="precioMax" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Stock Mín</mat-label>
+        <input matInput type="number" formControlName="stockMin" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Stock Máx</mat-label>
+        <input matInput type="number" formControlName="stockMax" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit">Buscar</button>
+      <button mat-stroked-button color="warn" type="button" (click)="resetearProductos()">Limpiar</button>
+    </form>
+
+    
+    <table mat-table [dataSource]="productos" class="mat-elevation-z2 full-width">
+
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let p"> {{ p.nombre }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="categoria">
+        <th mat-header-cell *matHeaderCellDef> Categoría </th>
+        <td mat-cell *matCellDef="let p"> {{ p.categoria }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="precio">
+        <th mat-header-cell *matHeaderCellDef> Precio </th>
+        <td mat-cell *matCellDef="let p"> {{ p.precio | currency }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="stock">
+        <th mat-header-cell *matHeaderCellDef> Stock </th>
+        <td mat-cell *matCellDef="let p"> {{ p.stock }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="prodColumnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: prodColumnas;"></tr>
+    </table>
+  </section>
+</div>

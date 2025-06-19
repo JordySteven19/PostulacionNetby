@@ -1,0 +1,66 @@
+<div class="contenedor-formulario">
+  <h2>{{ modoEdicion ? '✏️ Editar Transacción' : '➕ Registrar Transacción' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()" class="formulario">
+    
+    <mat-form-field appearance="outline" class="campo" disabled>
+      <mat-label>Nombre del producto</mat-label>
+      <input matInput [value]="producto.nombre" disabled />
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="outline" class="campo">
+      <mat-label>Tipo de transacción</mat-label>
+      <mat-select formControlName="tipo" required>
+        <mat-option value="Compra">Compra</mat-option>
+        <mat-option value="Venta">Venta</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="outline" class="campo">
+      <mat-label>Cantidad</mat-label>
+      <input matInput type="number" formControlName="cantidad" min="1" required />
+      <mat-error *ngIf="form.get('cantidad')?.hasError('required') && form.get('cantidad')?.touched">
+        ⚠️ Este campo es obligatorio.
+      </mat-error>
+      <mat-error *ngIf="form.get('cantidad')?.hasError('min')">
+        ⚠️ La cantidad debe ser al menos 1.
+      </mat-error>
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="outline" class="campo" disabled>
+      <mat-label>Stock del producto</mat-label>
+      <input matInput [value]="producto.stock" disabled />
+    </mat-form-field>
+
+   
+    <mat-form-field appearance="outline" class="campo" disabled>
+      <mat-label>Precio unitario</mat-label>
+      <input matInput [value]="producto.precio | currency" disabled />
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="outline" class="campo" disabled>
+      <mat-label>Total</mat-label>
+      <input matInput [value]="form.value.precioTotal | currency" disabled />
+    </mat-form-field>
+
+    
+    <div class="botones">
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="form.invalid || form.errors?.['stockInsuficiente']">
+        💾 {{ modoEdicion ? 'Actualizar' : 'Guardar' }}
+      </button>
+      <button mat-stroked-button color="warn" type="button" (click)="router.navigate(['/transacciones'])">
+        ❌ Cancelar
+      </button>
+    </div>
+  </form>
+
+  
+  <mat-card *ngIf="mostrarModal" class="modal">
+    {{ mensajeModal }}
+  </mat-card>
+</div>

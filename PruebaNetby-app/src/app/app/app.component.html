@@ -1,0 +1,12 @@
+<button mat-button [matMenuTriggerFor]="menu">Menu Netbyprueba</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item [routerLink]="['/productos']">Productos</button>
+<button mat-menu-item [routerLink]="['/transacciones']">Transacciones</button>
+<button mat-menu-item [routerLink]="['/tablas']">Tablas Avanzadas</button>
+
+
+</mat-menu>
+
+
+
+<router-outlet></router-outlet>

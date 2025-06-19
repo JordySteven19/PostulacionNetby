@@ -1,0 +1,27 @@
+
+# .NET Core
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+*.log
+
+# Angular
+node_modules/
+dist/
+out-tsc/
+.angular/
+.env
+*.log
+
+# Mac/Unix
+.DS_Store
+Thumbs.db
+
+# npm / Yarn / pnpm lock files (opcional)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
